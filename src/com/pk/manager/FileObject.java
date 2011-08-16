@@ -60,6 +60,10 @@ public class FileObject {
 		return isFile?"File-":"Dir-"+getName();
 	}
 	
+	public boolean isFile(){
+		return isFile;
+	}
+	
 	
 
 }
