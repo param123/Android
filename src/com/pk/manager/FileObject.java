@@ -1,15 +1,25 @@
 package com.pk.manager;
 
+import java.io.File;
+
 public class FileObject {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String name = null;
 	private boolean isFile = false;
 	private FileObject parent = null;
-	
+	private String path = null;
 	
 	public FileObject(String name,FileObject parent,boolean isFile){
 		this.name = name;
 		this.parent = parent;
+		this.isFile = isFile;
+	}
+	
+	public FileObject(String name,String path,boolean isFile){
+		this.name = name;
+		this.path = path;
 		this.isFile = isFile;
 	}
 	
@@ -49,15 +59,15 @@ public class FileObject {
 	
 	public String getPath(){
 		if(parent!=null){
-		   return parent.getPath()+"/"+getName();
+		   return parent.getPath()+File.separator+getName();
 		}else{
-			return getName();
+			return path;
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return isFile?"File-":"Dir-"+getName();
+		return getName();
 	}
 	
 	public boolean isFile(){

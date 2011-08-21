@@ -1,10 +1,7 @@
 package com.pk.manager;
 
-import java.io.File;
-
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -14,13 +11,14 @@ public abstract class AbstractFileListActivity extends ListActivity {
 	
 	
 	
-	protected abstract File getParentFile();
+	protected abstract FileObject getParentFileObject();
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setListAdapter(new FileAdapter(this,R.layout.list_item, getChildren()));
         handleOnClickListener();
-         
+        setTitle(getParentFileObject().getPath());
     }
 	
 	protected void handleOnClickListener(){
@@ -29,9 +27,10 @@ public abstract class AbstractFileListActivity extends ListActivity {
 	        lv.setOnItemClickListener(new OnItemClickListener() {
 	            public void onItemClick(AdapterView<?> parent, View view,
 	                int position, long id) {
-	            	Log.i("FileManager", ""+position);
 	            	FileObject fo = (FileObject) parent.getItemAtPosition(position);
-	            	openDir(fo);
+	            	if(!fo.isFile()){
+	            	   openDir(fo);
+	            	}
 	            }
 
 				
@@ -39,10 +38,13 @@ public abstract class AbstractFileListActivity extends ListActivity {
 	}
 	
 	protected FileObject[] getChildren(){
-		 FileObject rootObject = new FileObject(getParentFile().getName(), null,getParentFile().isFile());
-	     FileObject children[] = FileUtil.getFileObjectList(getParentFile(), rootObject);
+		 //File parentFile = getParentFileObject();
+		 FileObject rootObject = getParentFileObject();
+	     FileObject children[] = FileUtil.getFileObjectList(rootObject);
 		return children;
 	}
+	
+	
 	
 	private void openDir(FileObject fo){
     	FileUtil.openDirectory(this, fo);

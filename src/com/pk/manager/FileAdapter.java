@@ -49,11 +49,10 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 		holder.textView.setText(fo[position].getName());
 		// Change the icon for Windows and iPhone
 		FileObject foi = fo[position];
-		if (!foi.isFile()) {
-			holder.imageView.setImageResource(R.drawable.list_folder);
+		if (foi.isFile()) {
+			holder.imageView.setImageResource(R.drawable.list_file);
 		} else {
-			//holder.imageView.setImageResource(R.drawable.ok);
-			System.out.println("image resource..");
+			holder.imageView.setImageResource(R.drawable.list_folder);
 		}
 
 		return rowView;

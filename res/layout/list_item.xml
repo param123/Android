@@ -1,5 +1,16 @@
 
     <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-        <ImageView android:layout_width="22px" android:src="@drawable/list_folder" android:id="@+id/list_folder" android:layout_height="wrap_content" android:layout_marginRight="4px"></ImageView>
-        <TextView android:layout_width="match_parent" android:text="@+id/TextView01" android:id="@+id/label" android:layout_height="wrap_content" android:layout_marginRight="2px" android:layout_marginTop="4px" android:layout_marginLeft="2px"></TextView>
+        <ImageView android:layout_width="40dip" android:src="@drawable/list_folder" android:id="@+id/list_folder" android:layout_height="?android:attr/listPreferredItemHeight" android:layout_marginRight="4dip"></ImageView>
+        <TextView android:layout_width="match_parent" 
+                  android:text="@+id/TextView01" 
+                  android:id="@+id/label" 
+                  android:layout_height="?android:attr/listPreferredItemHeight"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:paddingRight="2dip" 
+                  android:paddingTop="4dip" 
+                  android:paddingLeft="8dip" 
+                  android:singleLine="true" 
+                  android:gravity="center_vertical"
+                  >
+                  </TextView>
     </LinearLayout>
