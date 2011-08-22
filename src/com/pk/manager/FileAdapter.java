@@ -24,6 +24,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 	public FileAdapter(Activity context, int textViewResourceId) {
 		super(context, textViewResourceId);
 		this.context = context;
+		
 	}
 	
 	
@@ -33,7 +34,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	 public View getView(int position, View convertView, ViewGroup parent) {
 		// ViewHolder will buffer the assess to the individual fields of the row
 		// layout
 
@@ -44,7 +45,8 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 		View rowView = convertView;
 		if (rowView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			rowView = inflater.inflate(R.layout.list_item, null, true);
+			
+			rowView = inflater.inflate(R.layout.items, null);
 			holder = new ViewHolder();
 			holder.textView = (TextView) rowView.findViewById(R.id.label);
 			holder.imageView = (ImageView) rowView.findViewById(R.id.list_folder);
@@ -64,8 +66,6 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 
 		return rowView;
 	}
-	
 
-	
 
 }

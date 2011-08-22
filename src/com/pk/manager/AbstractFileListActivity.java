@@ -1,5 +1,7 @@
 package com.pk.manager;
 
+import com.markupartist.android.widget.ActionBar;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +15,21 @@ public abstract class AbstractFileListActivity extends ListActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.list_item);
+		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar.setTitle("Home");
+		// You can also assign the title programmatically by passing a
+		// CharSequence or resource id.
+		//actionBar.setTitle(R.string.some_title);
+		
 		FileObject children[] = getChildren();
 		if (children != null) {
-			setListAdapter(new FileAdapter(this, R.layout.list_item, children));
+			setListAdapter(new FileAdapter(this, R.layout.items, children));
 		} else {
-			setListAdapter(new FileAdapter(this, R.layout.list_item));
+			setListAdapter(new FileAdapter(this,R.layout.items));
 		}
 		handleOnClickListener();
-		setTitle(getParentFileObject().getPath());
+		//setTitle(getParentFileObject().getPath());
 	}
 
 	protected void handleOnClickListener() {

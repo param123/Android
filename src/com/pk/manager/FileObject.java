@@ -74,6 +74,4 @@ public class FileObject {
 		return isFile;
 	}
 	
-	
-
 }

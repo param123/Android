@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.pk.manager;
+package com.markupartist.android.widget.actionbar;
 
 public final class R {
     public static final class attr {
