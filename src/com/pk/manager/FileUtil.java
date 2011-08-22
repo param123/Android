@@ -1,6 +1,7 @@
 package com.pk.manager;
 
 import java.io.File;
+import java.io.FileFilter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,15 +10,18 @@ public class FileUtil {
 	
 	  public static FileObject[] getFileObjectList(FileObject parent){
 	    	
-	    	File children[] = new File(parent.getPath()).listFiles();	    	
-	    	FileObject fo[] = new FileObject[0];
+	    	File children[] = new File(parent.getPath()).listFiles(new FileFilter() {
+				
+				public boolean accept(File pathname) {
+					return !pathname.isHidden() && pathname.getName().trim().length()>0;
+				}
+			});	    	
+	    	FileObject fo[] = null;
 	    	if(children!=null){
 		    	 fo = new FileObject[children.length];
 		    	int count=0;
 		    	for(File child:children){
-		    		if(!child.isHidden() && child.getName().trim().length()>0){
 		    		  fo[count++]= new FileObject(child.getName(),parent,child.isFile());
-		    		}
 		    	}
 	    	}
 	    	

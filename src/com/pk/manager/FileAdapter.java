@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 public class FileAdapter extends ArrayAdapter<FileObject> {
 	
-	private final Activity context;
-	private final FileObject[] fo;
+	private Activity context;
+	private FileObject[] fo;
 
 	public FileAdapter(Activity context, int textViewResourceId,
 			FileObject[] objects) {
@@ -19,6 +19,13 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 		this.context = context;
 		this.fo = objects;
 	}
+	
+
+	public FileAdapter(Activity context, int textViewResourceId) {
+		super(context, textViewResourceId);
+		this.context = context;
+	}
+	
 	
 	static class ViewHolder {
 		public ImageView imageView;
