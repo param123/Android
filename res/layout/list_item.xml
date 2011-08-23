@@ -3,7 +3,7 @@
         android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content" >
-	<com.markupartist.android.widget.ActionBar  android:id="@+id/actionbar"  style="@style/ActionBar"/>
+	<com.markupartist.android.widget.ActionBar  android:id="@+id/actionbar"  style="@style/ActionBar"/>	
 	<ListView
 		android:id="@android:id/android:list"
 		android:layout_width="fill_parent"

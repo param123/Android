@@ -40,6 +40,12 @@ public class FileUtil {
 	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	        return i;
 	    }
+	  
+	  public static Intent createIntent(Context context,Class clazz) {
+	        Intent i = new Intent(context, clazz);
+	        
+	        return i;
+	    }
 	    
 
 }

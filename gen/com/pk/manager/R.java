@@ -59,6 +59,9 @@ containing a value of this type.
         public static final int linearLayout1=0x7f08000a;
         public static final int list_folder=0x7f08000b;
         public static final int screen=0x7f080000;
+        public static final int search_button=0x7f080011;
+        public static final int searchbox=0x7f08000f;
+        public static final int serchEntry=0x7f080010;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -66,6 +69,7 @@ containing a value of this type.
         public static final int items=0x7f030002;
         public static final int list_item=0x7f030003;
         public static final int main=0x7f030004;
+        public static final int search=0x7f030005;
     }
     public static final class string {
         public static final int actionbar_activity_not_found=0x7f060002;
