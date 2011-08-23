@@ -1,13 +1,14 @@
 package com.pk.manager;
 
-import com.markupartist.android.widget.ActionBar;
-
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
 
 public abstract class AbstractFileListActivity extends ListActivity {
 
@@ -17,11 +18,8 @@ public abstract class AbstractFileListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_item);
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-		actionBar.setTitle("Home");
-		// You can also assign the title programmatically by passing a
-		// CharSequence or resource id.
-		//actionBar.setTitle(R.string.some_title);
-		
+		actionBar.setHomeAction(getHomeAction());
+		actionBar.setDisplayHomeAsUpEnabled(showHomeAsUpEnabled());
 		FileObject children[] = getChildren();
 		if (children != null) {
 			setListAdapter(new FileAdapter(this, R.layout.items, children));
@@ -29,7 +27,7 @@ public abstract class AbstractFileListActivity extends ListActivity {
 			setListAdapter(new FileAdapter(this,R.layout.items));
 		}
 		handleOnClickListener();
-		//setTitle(getParentFileObject().getPath());
+		setTitle(getParentFileObject().getPath());
 	}
 
 	protected void handleOnClickListener() {
@@ -46,6 +44,10 @@ public abstract class AbstractFileListActivity extends ListActivity {
 
 		});
 	}
+	
+	protected abstract boolean showHomeAsUpEnabled();
+	
+	protected abstract Action getHomeAction();
 
 	protected FileObject[] getChildren() {
 		// File parentFile = getParentFileObject();
@@ -53,6 +55,8 @@ public abstract class AbstractFileListActivity extends ListActivity {
 		FileObject children[] = FileUtil.getFileObjectList(rootObject);
 		return children;
 	}
+	
+	
 
 	private void openDir(FileObject fo) {
 		FileUtil.openDirectory(this, fo);

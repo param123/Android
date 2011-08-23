@@ -37,8 +37,8 @@ containing a value of this type.
         public static final int actionbar_btn=0x7f020002;
         public static final int actionbar_btn_normal=0x7f020003;
         public static final int actionbar_btn_pressed=0x7f020004;
-        public static final int folder=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_title_home_default=0x7f020006;
         public static final int icon=0x7f020007;
         public static final int list_file=0x7f020008;
         public static final int list_folder=0x7f020009;

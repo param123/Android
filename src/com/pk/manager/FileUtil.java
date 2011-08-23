@@ -34,6 +34,12 @@ public class FileUtil {
 	    	i.putExtra("name", fo.getName());
 	    	c.startActivity(i);	    	
 	    }
+	  
+	  public static Intent createHomeIntent(Context context) {
+	        Intent i = new Intent(context, FileManager.class);
+	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        return i;
+	    }
 	    
 
 }

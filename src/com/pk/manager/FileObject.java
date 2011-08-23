@@ -59,7 +59,7 @@ public class FileObject {
 	
 	public String getPath(){
 		if(parent!=null){
-		   return parent.getPath()+File.separator+getName();
+		   return parent.getPath()+getName()+File.separator;
 		}else{
 			return path;
 		}
