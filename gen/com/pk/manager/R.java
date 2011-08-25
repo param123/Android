@@ -44,8 +44,7 @@ containing a value of this type.
         public static final int list_folder=0x7f020009;
     }
     public static final class id {
-        public static final int TextView01=0x7f08000c;
-        public static final int actionbar=0x7f08000e;
+        public static final int actionbar=0x7f08000d;
         public static final int actionbar_actions=0x7f080006;
         public static final int actionbar_home=0x7f080001;
         public static final int actionbar_home_bg=0x7f080003;
@@ -55,10 +54,10 @@ containing a value of this type.
         public static final int actionbar_item=0x7f080009;
         public static final int actionbar_progress=0x7f080007;
         public static final int actionbar_title=0x7f080008;
-        public static final int label=0x7f08000d;
-        public static final int linearLayout1=0x7f08000a;
-        public static final int list_folder=0x7f08000b;
+        public static final int label=0x7f08000b;
+        public static final int list_folder=0x7f08000a;
         public static final int screen=0x7f080000;
+        public static final int secondLine=0x7f08000c;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;

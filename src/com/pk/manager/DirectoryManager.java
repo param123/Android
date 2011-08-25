@@ -7,7 +7,8 @@ public class DirectoryManager extends AbstractFileListActivity {
 	protected FileObject getParentFileObject() {
 		 String path = getIntent().getStringExtra("path");
 		 String name = getIntent().getStringExtra("name");
-		 FileObject parent = new FileObject(name, path, false);
+		 String metaData = getIntent().getStringExtra("metadata");
+		 FileObject parent = new FileObject(name, path, false,metaData);
 		return parent;
 	}
 	
