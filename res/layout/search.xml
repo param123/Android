@@ -2,20 +2,29 @@
 <LinearLayout android:id="@+id/searchbox"
  android:layout_width="fill_parent" 
  android:layout_height="fill_parent" 
+ android:orientation="vertical"
  xmlns:android="http://schemas.android.com/apk/res/android">
-<EditText
-	android:id="@+id/serchEntry"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:background="@android:drawable/editbox_background"
-	android:layout_below="@id/label"
-	android:singleLine="true"
-	/>
-	 <ImageView 
-	 android:layout_width="40dip" 
-	 android:src="@android:drawable/ic_menu_search"
-	 android:id="@+id/search_button" 
-	 android:layout_height="?android:attr/listPreferredItemHeight" 
-	 android:layout_marginRight="4dip"
-	 android:layout_marginLeft="4dip"></ImageView>
+ <Spinner android:id="@+id/spinner1" 
+			android:layout_height="wrap_content" 
+			android:layout_width="match_parent"
+			android:paddingTop="4dp"
+			 android:paddingBottom="4dp">
+			</Spinner>           
+<LinearLayout android:id="@+id/searchbox"
+ android:layout_width="fill_parent" 
+ android:layout_height="wrap_content" 
+ xmlns:android="http://schemas.android.com/apk/res/android" android:weightSum="1">
+ 
+   <EditText
+		android:id="@+id/serchEntry"
+		android:background="@android:drawable/editbox_background"
+		android:layout_below="@id/label"
+		android:singleLine="true"
+		android:layout_width="197dp" android:layout_height="54dp" android:layout_weight="0.87"/>
+		 <ImageView 
+		 android:layout_width="40dip" 
+		 android:src="@android:drawable/ic_menu_search"
+		 android:id="@+id/search_button" 
+		 android:layout_marginLeft="2dip" android:layout_height="54dp" android:layout_weight="0.22"></ImageView>
+         </LinearLayout>
 </LinearLayout>

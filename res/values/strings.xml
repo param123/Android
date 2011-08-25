@@ -3,4 +3,10 @@
     <string name="dir_path">Path</string>
     <string name="app_name">File System</string>
 <string name="parent_dir_key">parent_dir_path</string>
+<string name="search_title">Search</string>
+<string-array name="file_search_options_array">
+         <item name="file_name_search_title" >File name contains</item>
+         <item name="file_text_search_title">File text contains</item>
+</string-array>
+
 </resources>

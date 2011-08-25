@@ -16,7 +16,8 @@
         <activity android:label="@string/dir_path" 
                   android:name=".DirectoryManager">
         </activity>
-        <activity android:name=".SearchActivity" android:theme="@android:style/Theme.Dialog"></activity>
-
+        <activity android:name=".SearchActivity" 
+                  android:label="@string/search_title">
+                  </activity>
     </application>
 </manifest>
