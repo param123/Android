@@ -37,8 +37,8 @@ containing a value of this type.
         public static final int actionbar_btn=0x7f020002;
         public static final int actionbar_btn_normal=0x7f020003;
         public static final int actionbar_btn_pressed=0x7f020004;
-        public static final int folder=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_title_home_default=0x7f020006;
         public static final int icon=0x7f020007;
         public static final int list_file=0x7f020008;
         public static final int list_folder=0x7f020009;
@@ -57,7 +57,13 @@ containing a value of this type.
         public static final int label=0x7f08000b;
         public static final int list_folder=0x7f08000a;
         public static final int screen=0x7f080000;
+<<<<<<< HEAD
         public static final int secondLine=0x7f08000c;
+=======
+        public static final int search_button=0x7f080011;
+        public static final int searchbox=0x7f08000f;
+        public static final int serchEntry=0x7f080010;
+>>>>>>> 11261157436ab96342b99fd03f3d18755ea55fe1
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -65,6 +71,7 @@ containing a value of this type.
         public static final int items=0x7f030002;
         public static final int list_item=0x7f030003;
         public static final int main=0x7f030004;
+        public static final int search=0x7f030005;
     }
     public static final class string {
         public static final int actionbar_activity_not_found=0x7f060002;

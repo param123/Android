@@ -7,7 +7,6 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateFormat;
 
 public class FileUtil {
 	
@@ -40,7 +39,7 @@ public class FileUtil {
 	    	c.startActivity(i);	    	
 	    }
 	  
-<<<<<<< HEAD
+
 	  public static String fileMetaData(File file,SimpleDateFormat format){
 		  long time = file.lastModified();
 		  String timeFormat = formatTime(time, format);
@@ -72,7 +71,7 @@ public class FileUtil {
 	  public static String formatTime(long time,SimpleDateFormat format){
 		 return format.format(new Date(time));		  
 	  }
-=======
+
 	  public static Intent createHomeIntent(Context context) {
 	        Intent i = new Intent(context, FileManager.class);
 	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -80,11 +79,9 @@ public class FileUtil {
 	    }
 	  
 	  public static Intent createIntent(Context context,Class clazz) {
-	        Intent i = new Intent(context, clazz);
-	        
+	        Intent i = new Intent(context, clazz);	        
 	        return i;
 	    }
->>>>>>> 11261157436ab96342b99fd03f3d18755ea55fe1
-	    
+
 
 }
