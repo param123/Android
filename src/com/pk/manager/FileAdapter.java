@@ -31,6 +31,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 	static class ViewHolder {
 		public ImageView imageView;
 		public TextView textView;
+		public TextView attrView;
 	}
 	
 	@Override
@@ -50,12 +51,14 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 			holder = new ViewHolder();
 			holder.textView = (TextView) rowView.findViewById(R.id.label);
 			holder.imageView = (ImageView) rowView.findViewById(R.id.list_folder);
+			holder.attrView = (TextView) rowView.findViewById(R.id.secondLine);
 			rowView.setTag(holder);
 		} else {
 			holder = (ViewHolder) rowView.getTag();
 		}
 
-		holder.textView.setText(fo[position].getName());
+		//holder.textView.setText(fo[position].getName());
+		holder.attrView.setText("data");
 		// Change the icon for Windows and iPhone
 		FileObject foi = fo[position];
 		if (foi.isFile()) {

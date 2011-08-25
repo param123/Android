@@ -21,7 +21,7 @@ public class DirectoryManager extends AbstractFileListActivity {
 	}
 	
 	protected Action getHomeAction() {
-		return new IntentAction(this, FileUtil.createHomeIntent(this), com.markupartist.android.widget.actionbar.R.drawable.ic_title_home_default);
+		return ActionBarUtil.getHomeAction(this);
 	}
 
 }

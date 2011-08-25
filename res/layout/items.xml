@@ -1,15 +1,37 @@
- <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	        <ImageView android:layout_width="40dip" android:src="@drawable/list_folder" android:id="@+id/list_folder" android:layout_height="?android:attr/listPreferredItemHeight" android:layout_marginRight="4dip"></ImageView>
-	        <TextView android:layout_width="match_parent" 
-	                  android:text="@+id/TextView01" 
-	                  android:id="@+id/label" 
-	                  android:layout_height="?android:attr/listPreferredItemHeight"
-	                  android:textAppearance="?android:attr/textAppearanceLarge"
-	                  android:paddingRight="2dip" 
-	                  android:paddingTop="4dip" 
-	                  android:paddingLeft="8dip" 
-	                  android:singleLine="true" 
-	                  android:gravity="center_vertical"
-	                  >
-	                  </TextView>
-	    </LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"    
+    >
+    
+<ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/list_folder" 
+	    android:id="@+id/list_folder" 
+	    android:layout_marginRight="6dip"></ImageView>
+
+    <TextView
+        android:id="@+id/secondLine"
+        android:layout_width="fill_parent"
+        android:layout_height="28dip" 
+        android:layout_toRightOf="@id/list_folder"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:singleLine="true"
+        android:text="Simple application" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+		android:id="@+id/label"
+        android:layout_toRightOf="@id/list_folder"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:layout_above="@+id/secondLine"
+        android:text="My Application" 
+        /> 
+	    </RelativeLayout>

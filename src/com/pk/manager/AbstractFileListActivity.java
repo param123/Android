@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
-import com.markupartist.android.widget.ActionBar.IntentAction;
 
 public abstract class AbstractFileListActivity extends ListActivity {
 
@@ -21,7 +20,8 @@ public abstract class AbstractFileListActivity extends ListActivity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(getHomeAction());
 		actionBar.setDisplayHomeAsUpEnabled(showHomeAsUpEnabled());
-		actionBar.addAction(addSearchButton());
+		actionBar.addAction(ActionBarUtil.getSearchButton(this));
+		actionBar.addAction(ActionBarUtil.getViewButton(this));
 		FileObject children[] = getChildren();
 		if (children != null) {
 			setListAdapter(new FileAdapter(this, R.layout.items, children));
@@ -47,24 +47,16 @@ public abstract class AbstractFileListActivity extends ListActivity {
 		});
 	}
 	
-	private Action addSearchButton() {
-		return new IntentAction(this, FileUtil.createIntent(this,SearchActivity.class), android.R.drawable.ic_menu_search);
-	}
-	
-	
 	protected abstract boolean showHomeAsUpEnabled();
 	
 	protected abstract Action getHomeAction();
 
 	protected FileObject[] getChildren() {
-		// File parentFile = getParentFileObject();
 		FileObject rootObject = getParentFileObject();
 		FileObject children[] = FileUtil.getFileObjectList(rootObject);
 		return children;
 	}
 	
-	
-
 	private void openDir(FileObject fo) {
 		FileUtil.openDirectory(this, fo);
 	}

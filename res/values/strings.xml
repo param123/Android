@@ -3,4 +3,5 @@
     <string name="dir_path">Path</string>
     <string name="app_name">File System</string>
 <string name="parent_dir_key">parent_dir_path</string>
+<string name="search_title">Search file</string>
 </resources>

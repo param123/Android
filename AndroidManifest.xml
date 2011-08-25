@@ -4,9 +4,8 @@
       android:versionName="1.0" android:versionCode="1">
     <uses-sdk android:minSdkVersion="8" />
 
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:debuggable="true">
-        <activity android:name=".FileManager"
-                  android:label="@string/app_name">
+    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" >
+        <activity android:name=".FileManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -15,7 +14,9 @@
         <activity android:label="@string/dir_path" 
                   android:name=".DirectoryManager">
         </activity>
-        <activity android:name=".SearchActivity" android:theme="@android:style/Theme.Dialog"></activity>
+        <activity android:name=".SearchActivity"
+         android:label="@string/search_title">        
+        </activity>
 
     </application>
 </manifest>
