@@ -34,6 +34,7 @@ public abstract class AbstractFileListActivity extends ListActivity {
 
 	protected void handleOnClickListener() {
 		ListView lv = getListView();
+		
 		lv.setTextFilterEnabled(true);
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,

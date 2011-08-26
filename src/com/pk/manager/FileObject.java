@@ -10,17 +10,20 @@ public class FileObject {
 	private boolean isFile = false;
 	private FileObject parent = null;
 	private String path = null;
+	private String metaData = null;
 	
-	public FileObject(String name,FileObject parent,boolean isFile){
+	public FileObject(String name,FileObject parent,boolean isFile, String metaData){
 		this.name = name;
 		this.parent = parent;
 		this.isFile = isFile;
+		this.metaData = metaData;
 	}
 	
-	public FileObject(String name,String path,boolean isFile){
+	public FileObject(String name,String path,boolean isFile,String metaData){
 		this.name = name;
 		this.path = path;
 		this.isFile = isFile;
+		this.metaData = metaData;
 	}
 	
 	@Override
@@ -72,6 +75,10 @@ public class FileObject {
 	
 	public boolean isFile(){
 		return isFile;
+	}
+
+	public String getMetaData() {
+		return metaData;
 	}
 	
 }

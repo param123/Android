@@ -1,7 +1,6 @@
 package com.pk.manager;
 
 import com.markupartist.android.widget.ActionBar.Action;
-import com.markupartist.android.widget.ActionBar.IntentAction;
 
 
 
@@ -11,7 +10,8 @@ public class DirectoryManager extends AbstractFileListActivity {
 	protected FileObject getParentFileObject() {
 		 String path = getIntent().getStringExtra("path");
 		 String name = getIntent().getStringExtra("name");
-		 FileObject parent = new FileObject(name, path, false);
+		 String metaData = getIntent().getStringExtra("metadata");
+		 FileObject parent = new FileObject(name, path, false,metaData);
 		return parent;
 	}
 

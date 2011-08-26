@@ -57,8 +57,8 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 			holder = (ViewHolder) rowView.getTag();
 		}
 
-		//holder.textView.setText(fo[position].getName());
-		holder.attrView.setText("data");
+		holder.textView.setText(fo[position].getName());
+		holder.attrView.setText(fo[position].getMetaData());
 		// Change the icon for Windows and iPhone
 		FileObject foi = fo[position];
 		if (foi.isFile()) {

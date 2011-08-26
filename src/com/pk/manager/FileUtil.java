@@ -2,6 +2,8 @@ package com.pk.manager;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,10 +20,11 @@ public class FileUtil {
 			});	    	
 	    	FileObject fo[] = null;
 	    	if(children!=null){
+	    		SimpleDateFormat format = getDateFormatter();
 		    	 fo = new FileObject[children.length];
 		    	int count=0;
 		    	for(File child:children){
-		    		  fo[count++]= new FileObject(child.getName(),parent,child.isFile());
+		    		  fo[count++]= new FileObject(child.getName(),parent,child.isFile(),fileMetaData(child, format));
 		    	}
 	    	}
 	    	
@@ -32,9 +35,43 @@ public class FileUtil {
 	    	Intent i = new Intent(c, DirectoryManager.class);
 	    	i.putExtra("path", fo.getPath());
 	    	i.putExtra("name", fo.getName());
+	    	i.putExtra("metadata", fo.getMetaData());
 	    	c.startActivity(i);	    	
 	    }
 	  
+
+	  public static String fileMetaData(File file,SimpleDateFormat format){
+		  long time = file.lastModified();
+		  String timeFormat = formatTime(time, format);
+		  boolean isWritable = file.canWrite();
+		  boolean isReadable = file.canRead();
+		  boolean isExecutable = file.exists();
+		  StringBuilder sb = new StringBuilder();
+		  sb.append(timeFormat).append(" | ");
+		  if(isWritable){
+			  sb.append("rw");
+			  if(isExecutable){
+				  sb.append("-e");
+			  }
+		  }else if(isReadable){
+			  sb.append("r");
+			  if(isExecutable){
+				  sb.append("-e");
+			  }
+		  }else if(isExecutable){
+			  sb.append("e");
+		  }
+		  return sb.toString();		  
+	  }
+	  
+	  public static SimpleDateFormat getDateFormatter(){
+		  return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss aaa");
+	  }
+	  
+	  public static String formatTime(long time,SimpleDateFormat format){
+		 return format.format(new Date(time));		  
+	  }
+
 	  public static Intent createHomeIntent(Context context) {
 	        Intent i = new Intent(context, FileManager.class);
 	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -42,10 +79,9 @@ public class FileUtil {
 	    }
 	  
 	  public static Intent createIntent(Context context,Class clazz) {
-	        Intent i = new Intent(context, clazz);
-	        
+	        Intent i = new Intent(context, clazz);	        
 	        return i;
 	    }
-	    
+
 
 }
