@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/searchbox"
+ android:layout_width="fill_parent" 
  android:layout_height="fill_parent" 
- xmlns:android="http://schemas.android.com/apk/res/android" android:weightSum="1" android:layout_width="match_parent" android:orientation="vertical">
+ android:orientation="vertical"
+ xmlns:android="http://schemas.android.com/apk/res/android">
  <com.markupartist.android.widget.ActionBar  android:id="@+id/actionbar"  style="@style/ActionBar"/>
- <LinearLayout android:id="@+id/searchItems"
-			 android:layout_height="fill_parent" 
-			 xmlns:android="http://schemas.android.com/apk/res/android" 
-			 android:weightSum="1" android:layout_width="match_parent"
-			 android:orientation="horizontal"
-			 android:paddingTop="5dp">
-		    <EditText android:singleLine="true" 
-					    android:layout_width="260dp" 
-					    android:id="@+id/serchEntry" 
-					    android:layout_height="50dp" 
-					    android:layout_weight="0.74" 
-					    android:background="@android:drawable/editbox_background">
-		                <requestFocus></requestFocus>
-		    </EditText>
-    		<ImageView android:layout_marginLeft="4dip" 
-			    		android:src="@android:drawable/ic_menu_search" 
-			    		android:id="@+id/search_button" 
-			    		android:layout_width="wrap_content" 
-			    		android:layout_height="50dp">
-    		</ImageView>
+ <Spinner android:id="@+id/spinner1" 
+			android:layout_height="wrap_content" 
+			android:layout_width="match_parent"
+			android:paddingTop="4dp"
+			 android:paddingBottom="4dp">
+			</Spinner>           
+<LinearLayout android:id="@+id/searchbox"
+ android:layout_width="fill_parent" 
+ android:layout_height="wrap_content" 
+ xmlns:android="http://schemas.android.com/apk/res/android"
+  android:weightSum="1">
+ 
+   <EditText
+		android:id="@+id/serchEntry"
+		android:background="@android:drawable/editbox_background"
+		android:layout_below="@id/label"
+		android:singleLine="true"
+		android:layout_width="210dp" android:layout_height="54dp" android:layout_weight="0.93"/>
+   <Button android:id="@+id/searchBtn" 
+		   android:background="@android:drawable/ic_menu_search"
+		   android:layout_marginLeft="2dip" android:layout_width="50dp" android:layout_height="match_parent">
+		   </Button>
+		
+		
 </LinearLayout>
+<ListView
+		android:id="@android:id/android:list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:visibility="gone"/>
+		<TextView android:id="@android:id/empty"
+               android:layout_width="match_parent"
+               android:layout_height="?android:attr/listPreferredItemHeight"
+	           android:textAppearance="?android:attr/textAppearanceMedium"
+	           android:gravity="center"
+               android:text="Empty directory"/>
 </LinearLayout>
