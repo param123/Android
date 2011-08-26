@@ -18,7 +18,7 @@
   android:weightSum="1">
  
    <EditText
-		android:id="@+id/serchEntry"
+		android:id="@+id/searchEntry"
 		android:background="@android:drawable/editbox_background"
 		android:layout_below="@id/label"
 		android:singleLine="true"
@@ -40,5 +40,6 @@
                android:layout_height="?android:attr/listPreferredItemHeight"
 	           android:textAppearance="?android:attr/textAppearanceMedium"
 	           android:gravity="center"
-               android:text="Empty directory"/>
+	           android:visibility="gone"
+               android:text=""/>
 </LinearLayout>

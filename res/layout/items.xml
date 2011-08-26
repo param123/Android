@@ -23,17 +23,21 @@
         android:ellipsize="marquee"
         android:paddingLeft="5dip"
         android:gravity="center_vertical"
+        android:text="first line"
          /> 
  <TextView
         android:id="@+id/secondLine"
         android:layout_width="fill_parent"
-        android:layout_height="26dip" 
+        android:layout_height="20dip" 
         android:layout_toRightOf="@id/list_folder"
         android:layout_below="@id/label"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:gravity="right"
         android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13dip"
+        android:textStyle="italic"
+        android:typeface="serif"
+        android:text="second line"
         />
  </RelativeLayout>

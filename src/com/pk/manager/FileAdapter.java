@@ -1,5 +1,7 @@
 package com.pk.manager;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +13,18 @@ import android.widget.TextView;
 public class FileAdapter extends ArrayAdapter<FileObject> {
 	
 	private Activity context;
-	private FileObject[] fo;
+	//ArrayList<FileObject> foList = null;
 
-	public FileAdapter(Activity context, int textViewResourceId,
-			FileObject[] objects) {
-		super(context, textViewResourceId, objects);
+	public FileAdapter(Activity context, int textViewResourceId, List<FileObject> foList) {
+		super(context, textViewResourceId, foList);
 		this.context = context;
-		this.fo = objects;
+		//this.foList = foList;
 	}
 	
 
 	public FileAdapter(Activity context, int textViewResourceId) {
 		super(context, textViewResourceId);
 		this.context = context;
-		
 	}
 	
 	
@@ -36,6 +36,8 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 	
 	@Override
 	 public View getView(int position, View convertView, ViewGroup parent) {
+		
+		
 		// ViewHolder will buffer the assess to the individual fields of the row
 		// layout
 
@@ -53,14 +55,16 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 			holder.imageView = (ImageView) rowView.findViewById(R.id.list_folder);
 			holder.attrView = (TextView) rowView.findViewById(R.id.secondLine);
 			rowView.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) rowView.getTag();
 		}
+		
 
-		holder.textView.setText(fo[position].getName());
-		holder.attrView.setText(fo[position].getMetaData());
+		holder.textView.setText(getItem(position).getName());
+		holder.attrView.setText(getItem(position).getMetaData());
 		// Change the icon for Windows and iPhone
-		FileObject foi = fo[position];
+		FileObject foi = getItem(position);
 		if (foi.isFile()) {
 			holder.imageView.setImageResource(R.drawable.list_file);
 		} else {
@@ -69,6 +73,6 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 
 		return rowView;
 	}
-
+	
 
 }

@@ -4,14 +4,16 @@ import java.io.File;
 import java.io.FileFilter;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
 
 public class FileUtil {
 	
-	  public static FileObject[] getFileObjectList(FileObject parent){
+	  public static List<FileObject> getFileObjectList(FileObject parent){
 	    	
 	    	File children[] = new File(parent.getPath()).listFiles(new FileFilter() {
 				
@@ -19,17 +21,16 @@ public class FileUtil {
 					return !pathname.isHidden() && pathname.getName().trim().length()>0;
 				}
 			});	    	
-	    	FileObject fo[] = null;
+	    	List<FileObject> foList = null;
 	    	if(children!=null){
 	    		SimpleDateFormat format = getDateFormatter();
-		    	 fo = new FileObject[children.length];
-		    	int count=0;
+	    		foList = new ArrayList<FileObject>(children.length);
 		    	for(File child:children){
-		    		  fo[count++]= new FileObject(child.getName(),parent,child.isFile(),fileMetaData(child, format));
+		    		  foList.add(new FileObject(child.getName(),parent,child.isFile(),fileMetaData(child, format)));
 		    	}
 	    	}
 	    	
-	    	return fo;	    	
+	    	return foList;	    	
 	    }
 	  
 	  public static void openDirectory(Context c ,FileObject fo){
@@ -92,7 +93,8 @@ public class FileUtil {
 	    }
 	  
 	  public static Intent createIntent(Context context,Class clazz) {
-	        Intent i = new Intent(context, clazz);	        
+	        Intent i = new Intent(context, clazz);
+	        
 	        return i;
 	    }
 
