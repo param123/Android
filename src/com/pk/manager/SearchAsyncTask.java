@@ -2,6 +2,7 @@ package com.pk.manager;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.regex.Pattern;
 
 import android.app.ListActivity;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 	
 	private ListActivity activity = null;
 	private FileAdapter adapter = null;
+	private Pattern pattern = null;
 	
 	// default option
 	private SearchAlgo sAlgo = new NameAlgo();
@@ -52,6 +54,7 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 	}
 	
 	private File[] search(File f,final String searchToken) {
+		pattern = Pattern.compile(searchToken);
 		File listFile[] = f.listFiles(new FileFilter() {
 			public boolean accept(File pathname) {
 				if(isCancelled()) {
@@ -119,16 +122,23 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 	public class NameAlgo implements SearchAlgo{
 
 		public boolean matched(File file,String matchString) {
-			return file.getName().contains(matchString);
+			  return pattern.matcher(file.getName()).find();
 		}
 		
 	}
 	
 	public class TextAlgo implements SearchAlgo{
-
+		
 		public boolean matched(File file, String matchString) {
+			CharSequence charSeq = FileUtil.contentOfFile(file);
+			if(charSeq!=null) {
+				 return pattern.matcher(charSeq).find();
+			}
+			
 			return false;
 		}
+		
+		
 		
 	}
 }

@@ -1,9 +1,11 @@
 package com.pk.manager;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -24,7 +26,6 @@ public class SearchActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		currentDir = getIntent().getStringExtra("path");
-		
 		setContentView(R.layout.search);
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(ActionBarUtil.getHomeAction(this));
@@ -58,6 +59,8 @@ public class SearchActivity extends ListActivity {
 				if(asyncTask!=null && asyncTask.getStatus()!=AsyncTask.Status.FINISHED) {
 				    asyncTask.cancel(true);
 				}
+				
+				
 			}
 
 		});
@@ -88,6 +91,8 @@ public class SearchActivity extends ListActivity {
 	
 	private String getSearchText() {
 		EditText text = (EditText)findViewById(R.id.searchEntry);
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    	imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
 		return text.getText().toString();
 	}
 	

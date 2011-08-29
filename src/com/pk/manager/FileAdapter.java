@@ -3,6 +3,8 @@ package com.pk.manager;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,25 +56,37 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 			holder.textView = (TextView) rowView.findViewById(R.id.label);
 			holder.imageView = (ImageView) rowView.findViewById(R.id.list_folder);
 			holder.attrView = (TextView) rowView.findViewById(R.id.secondLine);
+			
 			rowView.setTag(holder);
 			
 		} else {
 			holder = (ViewHolder) rowView.getTag();
 		}
 		
-
 		holder.textView.setText(getItem(position).getName());
 		holder.attrView.setText(getItem(position).getMetaData());
 		// Change the icon for Windows and iPhone
 		FileObject foi = getItem(position);
 		if (foi.isFile()) {
+			Intent intent = FileUtil.openFileIntent(getItem(position).getPath(), context);
+			
+			if(intent!=null) {
+				Drawable d = FileUtil.getDefaultIcon(intent, context);
+				if(d!=null) {
+					holder.imageView.setImageDrawable(d);
+				}else {
+					holder.imageView.setImageResource(R.drawable.list_file);
+				}
+			}else {
 			holder.imageView.setImageResource(R.drawable.list_file);
+			}
 		} else {
 			holder.imageView.setImageResource(R.drawable.list_folder);
 		}
 
 		return rowView;
 	}
+	
 	
 
 }

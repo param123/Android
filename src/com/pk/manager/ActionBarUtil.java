@@ -35,7 +35,7 @@ public class ActionBarUtil {
 	}
 	
 	public static  Action getViewButton(Context context) {
-		return new IntentAction(context, FileUtil.createIntent(context,SearchActivity.class), android.R.drawable.ic_menu_view);
+		return new IntentAction(context, FileUtil.createIntent(context,SearchActivity.class), R.drawable.ic_title_grid_default);
 	}
 
 }

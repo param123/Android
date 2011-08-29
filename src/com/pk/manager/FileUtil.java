@@ -2,7 +2,12 @@ package com.pk.manager;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.text.DecimalFormat;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +15,12 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
+import android.webkit.MimeTypeMap;
 
 public class FileUtil {
 	
@@ -97,6 +108,72 @@ public class FileUtil {
 	        
 	        return i;
 	    }
+	  
+	  public static CharSequence contentOfFile(File filename)  {
+		  
+		    FileInputStream fis = null; 
+		    CharBuffer cbuf = null;
+		    FileChannel fc = null;
+		    ByteBuffer bbuf = null;
+		    try {
+			    fis = new FileInputStream(filename);
+			    
+			    fc = fis.getChannel();
+			    Log.d("file size"+ fc.size(),"");
+			    // Create a read-only CharBuffer on the file
+			     bbuf = fc.map(FileChannel.MapMode.READ_ONLY, 0, (int)fc.size());
+			     cbuf = Charset.forName("8859_1").newDecoder().decode(bbuf);
+		    }catch(Exception e) {
+		    	Log.d("Error while reading file "+filename,Log.getStackTraceString(e));
+		    }finally {
+		    	
+		    	if(fc!=null) {
+		    		try {
+						fc.close();
+					} catch (IOException e) {
+					}
+		    	}
+		    	
+		    	if(fis!=null) {
+		    		try {
+						fis.close();
+					} catch (IOException e) {
+						
+					}
+		    	}
+		    	cbuf = null;
+		    	bbuf = null;
+		    	
+		    }
+		    return cbuf;
+		}
+	  
+	  public static Intent openFileIntent(String file,Context context) {
+		 return openFileIntent(new File(file), context);
+	  }
+	  
+	  public static Intent openFileIntent(File file,Context context) {
+		  MimeTypeMap mime = MimeTypeMap.getSingleton();
+		  Uri path = Uri.fromFile(file);
+		  String type = mime.getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(path.getPath()));
+		  Intent intent = null;
+		  if(type!=null) {
+	          intent = new Intent(Intent.ACTION_VIEW);          
+	          intent.setDataAndType(path, type);
+	          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		  }
+		  return intent;
+	  }
+	  
+	  public static Drawable getDefaultIcon(Intent intent,Context context) {
+             ResolveInfo resolveInfo =  context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+	          if(resolveInfo!=null) {
+	            return resolveInfo.loadIcon(context.getPackageManager());
+	          }
+          return null;
+		}
+          
+
 
 
 }
