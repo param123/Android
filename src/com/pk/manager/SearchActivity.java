@@ -1,26 +1,31 @@
 package com.pk.manager;
 
-import android.app.ListActivity;
+import java.util.ArrayList;
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.actionbar.R;
 
-public class SearchActivity extends ListActivity {
+public class SearchActivity extends Activity implements IOnClickHandler{
 	
 	private AsyncTask<String, FileObject, Void> asyncTask = null;
 	private String currentDir = null;
+	private ToggleAction toggleAction = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class SearchActivity extends ListActivity {
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(ActionBarUtil.getHomeAction(this));
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		toggleAction = (ToggleAction)ActionBarUtil.getViewButton(this);
+		actionBar.addAction(toggleAction);
 		//actionBar.addAction(ActionBarUtil.getSearchButton(this));
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -41,30 +48,28 @@ public class SearchActivity extends ListActivity {
 	    //we can attach onClick in xml as well.
 	    Button searchButton = (Button)findViewById(R.id.searchBtn);
 	    attachListenerToBtn(searchButton);
-	    handleOnClickListener();
+	    //handleOnClickListener();
 	    setTitle(getResources().getString(R.string.search_title)+" "+currentDir);
 	}
 	
-	private final ListActivity getActivityContext(){
+	private final Activity getActivityContext(){
 		return this;
 	}
 	
-	protected void handleOnClickListener() {
-		ListView lv = getListView();
-		
-		lv.setTextFilterEnabled(true);
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if(asyncTask!=null && asyncTask.getStatus()!=AsyncTask.Status.FINISHED) {
-				    asyncTask.cancel(true);
-				}
-				
-				
-			}
-
-		});
-	}
+//	protected void handleOnClickListener(AbsListView lv) {
+////		ListView lv = (ListView)findViewById(android.R.id.list);
+//		
+//		lv.setTextFilterEnabled(true);
+//		lv.setOnItemClickListener(new OnItemClickListener() {
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				if(asyncTask!=null && asyncTask.getStatus()!=AsyncTask.Status.FINISHED) {
+//				    asyncTask.cancel(true);
+//				}
+//			}
+//
+//		});
+//	}
 	
 	
 	private void attachListenerToBtn(Button btn){
@@ -74,11 +79,21 @@ public class SearchActivity extends ListActivity {
             	String searchText = getSearchText();
             	long position = getSearchSelectedOption();
             	if(searchText.trim().length()>0) {
-	            	ListView lv = getListView();
-	            	lv.setVisibility(View.VISIBLE);
-	            	FileAdapter fa = new FileAdapter(getActivityContext(), R.layout.items);
-	             	getActivityContext().setListAdapter(fa);
-	            	asyncTask = new SearchAsyncTask(getActivityContext());
+            		ArrayAdapter<FileObject> foa = null;
+            		AbsListView alv = null;
+            		if(toggleAction.isListView()) {
+            			alv = (ListView)findViewById(android.R.id.list);
+            			alv.setVisibility(View.VISIBLE);
+    	            	foa = new FileAdapter(getActivityContext(), R.layout.items,new ArrayList<FileObject>());
+    	            	alv.setAdapter(foa);
+            		}else {
+            			alv = (GridView)findViewById(R.id.gridview);
+            			alv.setVisibility(View.VISIBLE);
+            			foa = new ImageAdapter(getActivityContext(), R.layout.griditems,new ArrayList<FileObject>());
+            			alv.setAdapter(foa);
+            		}
+            		attachOnClickListener(alv);
+            		asyncTask = new SearchAsyncTask(getActivityContext(),foa);
 	            	if(position==1) {
 	            		((SearchAsyncTask)asyncTask).setAlgo(((SearchAsyncTask)asyncTask).new TextAlgo());
 	            	}
@@ -108,6 +123,20 @@ public class SearchActivity extends ListActivity {
 		    asyncTask.cancel(true);
 		}
 		super.onPause();
+	}
+
+	public void attachOnClickListener(AbsListView lv) {
+		lv.setTextFilterEnabled(true);
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(asyncTask!=null && asyncTask.getStatus()!=AsyncTask.Status.FINISHED) {
+				    asyncTask.cancel(true);
+				}
+			}
+
+		});
+		
 	}
 	
 }

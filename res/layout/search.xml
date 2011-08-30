@@ -5,41 +5,55 @@
  android:orientation="vertical"
  xmlns:android="http://schemas.android.com/apk/res/android">
  <com.markupartist.android.widget.ActionBar  android:id="@+id/actionbar"  style="@style/ActionBar"/>
+ <LinearLayout android:id="@+id/searchbox"
+ android:layout_width="fill_parent" 
+ android:layout_height="wrap_content" 
+ android:orientation="vertical"
+ android:background="#A4C639"
+ xmlns:android="http://schemas.android.com/apk/res/android">
  <Spinner android:id="@+id/spinner1" 
-			android:layout_height="wrap_content" 
+			android:layout_height="40dp" 
 			android:layout_width="match_parent"
 			android:paddingTop="4dp"
 			 android:paddingBottom="4dp">
 			</Spinner>           
 <LinearLayout android:id="@+id/searchbox"
- android:layout_width="fill_parent" 
- android:layout_height="wrap_content" 
- xmlns:android="http://schemas.android.com/apk/res/android"
-  android:weightSum="1">
+	 android:layout_width="fill_parent" 
+	 android:layout_height="wrap_content" 
+	 xmlns:android="http://schemas.android.com/apk/res/android"
+     android:weightSum="1"
+     android:paddingBottom="8dp"
+     >
  
    <EditText
 		android:id="@+id/searchEntry"
 		android:background="@android:drawable/editbox_background"
 		android:layout_below="@id/label"
 		android:singleLine="true"
-		android:layout_width="210dp" android:layout_height="54dp" android:layout_weight="0.93"/>
+		android:layout_width="210dp" android:layout_height="40dp" android:layout_weight="0.93"/>
    <Button android:id="@+id/searchBtn" 
 		   android:background="@android:drawable/ic_menu_search"
-		   android:layout_marginLeft="2dip" android:layout_width="50dp" android:layout_height="match_parent">
+		   android:layout_marginLeft="2dip" android:layout_width="40dp" android:layout_height="match_parent">
 		   </Button>
 		
 		
 </LinearLayout>
+</LinearLayout>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+		    android:id="@+id/gridview"
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
+		    android:columnWidth="90dp"
+		    android:numColumns="auto_fit"
+		    android:verticalSpacing="10dp"
+		    android:horizontalSpacing="10dp"
+		    android:stretchMode="columnWidth"
+		    android:gravity="center"
+		    android:visibility="gone"/>
 <ListView
 		android:id="@android:id/android:list"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:visibility="gone"/>
-		<TextView android:id="@android:id/empty"
-               android:layout_width="match_parent"
-               android:layout_height="?android:attr/listPreferredItemHeight"
-	           android:textAppearance="?android:attr/textAppearanceMedium"
-	           android:gravity="center"
-	           android:visibility="gone"
-               android:text=""/>
+
 </LinearLayout>

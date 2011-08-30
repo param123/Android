@@ -1,5 +1,6 @@
 package com.pk.manager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -34,8 +35,8 @@ public class ActionBarUtil {
 		return new IntentAction(context, FileUtil.createIntent(context,SearchActivity.class), android.R.drawable.arrow_up_float);
 	}
 	
-	public static  Action getViewButton(Context context) {
-		return new IntentAction(context, FileUtil.createIntent(context,SearchActivity.class), R.drawable.ic_title_grid_default);
+	public static  Action getViewButton(Activity context) {
+		return new ToggleAction(context);
 	}
-
+	
 }

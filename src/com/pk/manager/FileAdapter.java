@@ -1,5 +1,6 @@
 package com.pk.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -12,23 +13,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class FileAdapter extends ArrayAdapter<FileObject> {
+public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 	
 	private Activity context;
-	//ArrayList<FileObject> foList = null;
+	List<FileObject> foList = null;
 
 	public FileAdapter(Activity context, int textViewResourceId, List<FileObject> foList) {
 		super(context, textViewResourceId, foList);
 		this.context = context;
-		//this.foList = foList;
+		this.foList = foList;
 	}
 	
 
-	public FileAdapter(Activity context, int textViewResourceId) {
-		super(context, textViewResourceId);
-		this.context = context;
-	}
-	
+//	public FileAdapter(Activity context, int textViewResourceId) {
+//		super(context, textViewResourceId);
+//		this.context = context;
+//		this.foList = new ArrayList<FileObject>();
+//	}
 	
 	static class ViewHolder {
 		public ImageView imageView;
@@ -38,7 +39,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 	
 	@Override
 	 public View getView(int position, View convertView, ViewGroup parent) {
-		
+	
 		
 		// ViewHolder will buffer the assess to the individual fields of the row
 		// layout
@@ -85,6 +86,22 @@ public class FileAdapter extends ArrayAdapter<FileObject> {
 		}
 
 		return rowView;
+	}
+	
+	@Override
+	public void add(FileObject object) {
+		foList.add(object);
+		super.add(object);
+	}
+	
+	@Override
+	public FileObject getItem(int position) {
+		return foList.get(position);
+	}
+	
+
+	public List<FileObject> getDataList() {
+		return foList;
 	}
 	
 	

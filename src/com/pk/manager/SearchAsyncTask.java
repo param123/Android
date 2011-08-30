@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.markupartist.android.widget.ActionBar;
@@ -14,16 +17,16 @@ import com.markupartist.android.widget.actionbar.R;
 
 public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 	
-	private ListActivity activity = null;
-	private FileAdapter adapter = null;
+	private Activity activity = null;
+	private ArrayAdapter<FileObject> adapter = null;
 	private Pattern pattern = null;
 	
 	// default option
 	private SearchAlgo sAlgo = new NameAlgo();
 	
-	public SearchAsyncTask(ListActivity activity) {
+	public SearchAsyncTask(Activity activity,ArrayAdapter<FileObject> adapter) {
 		this.activity = activity;
-		adapter = (FileAdapter)activity.getListAdapter();
+		this.adapter = adapter;
 	}
 	
 	public void setAlgo(SearchAlgo algo) {

@@ -1,0 +1,24 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dip"
+    android:layout_height="70dip"
+    android:padding="4dip"
+    >
+ <ImageView
+        android:id="@+id/grid_img"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/list_folder" />
+<TextView
+        android:id="@+id/grid_label" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grid_img"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:text="first line sample"
+         /> 
+ </RelativeLayout>

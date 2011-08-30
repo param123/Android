@@ -104,8 +104,7 @@ public class FileUtil {
 	    }
 	  
 	  public static Intent createIntent(Context context,Class clazz) {
-	        Intent i = new Intent(context, clazz);
-	        
+	        Intent i = new Intent(context, clazz);	        
 	        return i;
 	    }
 	  
