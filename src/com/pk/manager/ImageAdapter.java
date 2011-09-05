@@ -88,13 +88,14 @@ public class ImageAdapter extends ArrayAdapter<FileObject> implements IDataStore
 
     @Override
 	public void add(FileObject object) {
+    	super.add(object);
 		foList.add(object);
-		super.add(object);
+		
 	}
 	
 	@Override
 	public FileObject getItem(int position) {
-		return foList.get(position);
+		return super.getItem(position);
 	}
 	
 

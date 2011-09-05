@@ -20,7 +20,10 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class FileUtil {
 	
@@ -171,7 +174,18 @@ public class FileUtil {
 	          }
           return null;
 		}
-          
+	  
+	  public static void openFile(Context c ,FileObject fo){
+	    	Intent i = openFileIntent(fo.getPath(), c);
+	    	if(i!=null) {
+	        	c.startActivity(i);
+	    	}else {
+               Toast.makeText(c, "No application found \r\n to open the file type.", Toast.LENGTH_SHORT).show();	    
+	    	}
+	    }
+	  
+	  
+	  
 
 
 

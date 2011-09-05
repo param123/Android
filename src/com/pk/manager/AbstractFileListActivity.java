@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
@@ -26,14 +31,17 @@ public abstract class AbstractFileListActivity extends Activity implements IOnCl
 		setContentView(R.layout.list_item);
 		ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
 		actionBar.setHomeAction(getHomeAction());
+	
 		actionBar.setDisplayHomeAsUpEnabled(showHomeAsUpEnabled());
+		//FileUtil.attachTitleView(this, actionBar,2);
 		FileObject parentFileObject = getParentFileObject();
 		actionBar.addAction(ActionBarUtil.getSearchButton(this,parentFileObject.getPath()));
 		toggleAction =(ToggleAction)ActionBarUtil.getViewButton(this);
 		actionBar.addAction(toggleAction);
 		setAdapter();
 		handleOnClickListener();
-		setTitle(parentFileObject.getPath());
+		actionBar.setTitle(parentFileObject.getPath());
+		 
 	}
 	
 	private void setAdapter() {
@@ -52,18 +60,26 @@ public abstract class AbstractFileListActivity extends Activity implements IOnCl
 		attachOnClickListener((ListView)findViewById(android.R.id.list));
 	}
 	
+	private final Activity getActivityContext(){
+		return this;
+	}
+	
 	public void attachOnClickListener(AbsListView view) {
 		view.setTextFilterEnabled(true);
+		
 		view.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				FileObject fo = (FileObject) parent.getItemAtPosition(position);
-				if (!fo.isFile()) {
+				if (fo.isFile()) {
+					FileUtil.openFile(getActivityContext(), fo);
+				}else {
 					openDir(fo);
 				}
 			}
 
 		});
+		
 	}
 	
 	

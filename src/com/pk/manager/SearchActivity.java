@@ -49,7 +49,8 @@ public class SearchActivity extends Activity implements IOnClickHandler{
 	    Button searchButton = (Button)findViewById(R.id.searchBtn);
 	    attachListenerToBtn(searchButton);
 	    //handleOnClickListener();
-	    setTitle(getResources().getString(R.string.search_title)+" "+currentDir);
+	    // setTitle(getResources().getString(R.string.search_title)+" "+currentDir);
+	    actionBar.setTitle(getResources().getString(R.string.search_title)+" "+currentDir);
 	}
 	
 	private final Activity getActivityContext(){
@@ -57,7 +58,7 @@ public class SearchActivity extends Activity implements IOnClickHandler{
 	}
 	
 //	protected void handleOnClickListener(AbsListView lv) {
-////		ListView lv = (ListView)findViewById(android.R.id.list);
+//		ListView lv = (ListView)findViewById(android.R.id.list);
 //		
 //		lv.setTextFilterEnabled(true);
 //		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -89,6 +90,7 @@ public class SearchActivity extends Activity implements IOnClickHandler{
             		}else {
             			alv = (GridView)findViewById(R.id.gridview);
             			alv.setVisibility(View.VISIBLE);
+            			
             			foa = new ImageAdapter(getActivityContext(), R.layout.griditems,new ArrayList<FileObject>());
             			alv.setAdapter(foa);
             		}
@@ -133,6 +135,8 @@ public class SearchActivity extends Activity implements IOnClickHandler{
 				if(asyncTask!=null && asyncTask.getStatus()!=AsyncTask.Status.FINISHED) {
 				    asyncTask.cancel(true);
 				}
+				FileObject fo = (FileObject) parent.getItemAtPosition(position);
+				FileUtil.openFile(getActivityContext(), fo);
 			}
 
 		});

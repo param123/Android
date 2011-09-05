@@ -2,6 +2,7 @@ package com.pk.manager;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.concurrent.CancellationException;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
@@ -47,30 +48,33 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 		}
 		
 		if(!startDir.exists()) {
-			Toast.makeText(activity,"Search cann't be performed due to \r\n absence of directory "+startDir.getPath(),
+			Toast.makeText(activity,"Search can't be performed due to \r\n absence of directory "+startDir.getPath(),
                     Toast.LENGTH_SHORT).show();
 		}
 		
+		try {
+	    pattern = Pattern.compile(searchToken);
 		search(startDir, searchToken);
+		}catch(CancellationException re) {
+			
+		}
 		
 		return null;
 	}
 	
-	private File[] search(File f,final String searchToken) {
-		pattern = Pattern.compile(searchToken);
+	private void search(File f,final String searchToken) {
+		
 		File listFile[] = f.listFiles(new FileFilter() {
 			public boolean accept(File pathname) {
 				if(isCancelled()) {
-					throw new RuntimeException();
+					throw new CancellationException();
 				}
 				if( !pathname.isHidden() && pathname.getName().trim().length()>0) {
 					
 					if(pathname.isFile()) {
-					  //FileObject fo = new FileObject("Sample"+i,"/demo"+i,true,"no metadata"+i);
 						if(sAlgo.matched(pathname,searchToken)) {
-							FileObject fo = new FileObject(pathname.getName(),pathname.getPath(),true,pathname.getPath());
-					       publishProgress(fo);
-					       return false;
+							FileObject fo = new FileObject(pathname.getName(),pathname.getPath(),true,pathname.getAbsolutePath());
+					        publishProgress(fo);
 						}
 					}else {
 						return true;
@@ -83,13 +87,12 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 		if(listFile!=null&&listFile.length>0) {
 			for(File child:listFile) {
 				if(isCancelled()) {
-					throw new RuntimeException();
+					throw new CancellationException();
 				}
 				search(child, searchToken);				
 			}
 		}
 		
-		return listFile;
 	}
 	
 	
@@ -102,6 +105,8 @@ public class SearchAsyncTask extends AsyncTask<String, FileObject, Void>{
 	
 	@Override
 	protected void onProgressUpdate(FileObject... values) {
+		System.out.println(values[0].getPath());
+		System.out.println(values.length);
 		adapter.add(values[0]);
 	}
 	

@@ -1,17 +1,21 @@
 package com.pk.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 	
@@ -60,9 +64,29 @@ public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 			
 			rowView.setTag(holder);
 			
+			
 		} else {
 			holder = (ViewHolder) rowView.getTag();
 		}
+		
+		rowView.setOnLongClickListener(new OnLongClickListener() {
+			
+			public boolean onLongClick(View v) {
+				AlertDialog.Builder popupOpt = new AlertDialog.Builder(context);
+				final String items[] = new String[] {"Copy","Paste","Delete","Properties"};
+				popupOpt.setItems(items, new OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						 Toast.makeText(context, items[which], Toast.LENGTH_SHORT).show();
+						
+					}
+				});
+				System.out.println("long click ");
+				popupOpt.create().show();
+				
+				return true;
+			}
+		});
 		
 		holder.textView.setText(getItem(position).getName());
 		holder.attrView.setText(getItem(position).getMetaData());
@@ -90,13 +114,13 @@ public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 	
 	@Override
 	public void add(FileObject object) {
-		foList.add(object);
 		super.add(object);
+		foList.add(object);
 	}
 	
 	@Override
 	public FileObject getItem(int position) {
-		return foList.get(position);
+		return super.getItem(position);
 	}
 	
 

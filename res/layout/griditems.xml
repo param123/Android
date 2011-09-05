@@ -1,6 +1,6 @@
  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="60dip"
-    android:layout_height="70dip"
+    android:layout_height="80dip"
     android:padding="4dip"
     >
  <ImageView
@@ -18,7 +18,7 @@
         android:layout_below="@id/grid_img"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:ellipsize="marquee"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="first line sample"
          /> 
  </RelativeLayout>

@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content" >
+	android:layout_height="wrap_content"
+	 >
 	<!-- android green #A4C639 -->
 	<com.markupartist.android.widget.ActionBar  android:id="@+id/actionbar"  style="@style/ActionBar"/>	
 	<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
 		    android:id="@+id/gridview"
 		    android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content"
-		    android:columnWidth="90dp"
+		    android:columnWidth="70dp"
 		    android:numColumns="auto_fit"
-		    android:verticalSpacing="10dp"
-		    android:horizontalSpacing="10dp"
+		    android:verticalSpacing="12dp"
+		    android:horizontalSpacing="5dp"
 		    android:stretchMode="columnWidth"
 		    android:gravity="center"
-		    android:visibility="invisible"/>
+		    />
 	<ListView
 		android:id="@android:id/android:list"
 		android:layout_width="fill_parent"
