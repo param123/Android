@@ -7,15 +7,16 @@
      android:weightSum="1">
         <ImageView
          android:layout_width="wrap_content" 
-         android:layout_height="fill_parent"
+         android:layout_height="wrap_content"
          android:src="@drawable/list_folder" 
          android:id="@+id/pop_img"
-         android:padding="2dp"></ImageView>
+         android:paddingRight="10dp"
+         ></ImageView>
         <TextView android:id="@+id/pop_text" 
         android:textAppearance="?android:attr/textAppearanceMedium" 
         android:text="TextView" 
         android:layout_width="wrap_content" 
-        android:layout_height="fill_parent" 
+        android:layout_height="wrap_content" 
         android:textColor="@android:color/black"
-        android:layout_weight="0.90"></TextView>
+        android:layout_weight="1"></TextView>
     </LinearLayout>

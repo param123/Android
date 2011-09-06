@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 public class PopupAdapter extends ArrayAdapter<String> {
 
-	
-	
+		
 	public PopupAdapter(Context context, String[] objects) {
 		super(context, 0, objects);
 	}
@@ -41,9 +40,12 @@ public class PopupAdapter extends ArrayAdapter<String> {
 			holder = (ViewHolder) rowView.getTag();
 		}
 		
-		holder.textView.setText(getItem(position));
-		holder.imageView.setImageResource(R.drawable.paste);
 		
+		
+		holder.textView.setText(getItem(position));
+		if(EditManager.getInstance().imgAvaliable(getItem(position))) {
+		   holder.imageView.setImageResource(EditManager.getInstance().getIcon(getItem(position)));
+		}
 		return rowView;
 	}
 
