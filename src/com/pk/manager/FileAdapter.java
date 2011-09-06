@@ -72,17 +72,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 		rowView.setOnLongClickListener(new OnLongClickListener() {
 			
 			public boolean onLongClick(View v) {
-				AlertDialog.Builder popupOpt = new AlertDialog.Builder(context);
-				final String items[] = new String[] {"Copy","Paste","Delete","Properties"};
-				popupOpt.setItems(items, new OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						 Toast.makeText(context, items[which], Toast.LENGTH_SHORT).show();
-						
-					}
-				});
-				System.out.println("long click ");
-				popupOpt.create().show();
+				EditManager.getInstance().showPopup(context, null);
 				
 				return true;
 			}
