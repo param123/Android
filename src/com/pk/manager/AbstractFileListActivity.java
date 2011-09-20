@@ -66,7 +66,6 @@ public abstract class AbstractFileListActivity extends Activity implements IOnCl
 	
 	public void attachOnClickListener(AbsListView view) {
 		view.setTextFilterEnabled(true);
-		
 		view.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {

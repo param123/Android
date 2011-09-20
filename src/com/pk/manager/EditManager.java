@@ -48,7 +48,7 @@ public class EditManager {
 		return false;
 	}
 	
-	public void showPopup(final Context context,FileObject fo) {
+	public boolean showPopup(final Context context,FileObject fo) {
 		AlertDialog.Builder popupOpt = new AlertDialog.Builder(context);
 		final String items[] = new String[] {"Copy","Paste","Cut","Properties"};
 		popupOpt.setAdapter(new PopupAdapter(context,  items), new OnClickListener() {
@@ -61,6 +61,7 @@ public class EditManager {
 		AlertDialog dialog = popupOpt.create();
         dialog.getListView().setPadding(5, 5, 5, 5);
         dialog.show();
+        return true;
 	}
 	
 	public int getIcon(String key) {

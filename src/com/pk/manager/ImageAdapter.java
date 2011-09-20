@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class ImageAdapter extends ArrayAdapter<FileObject> implements IDataStore
 		public TextView textView;
 	}
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
     	
     	
     	ViewHolder holder;
@@ -71,6 +72,26 @@ public class ImageAdapter extends ArrayAdapter<FileObject> implements IDataStore
 		} else {
 			holder.imageView.setImageResource(R.drawable.list_folder);
 		}
+		
+         rowView.setOnLongClickListener(new OnLongClickListener() {
+			
+			public boolean onLongClick(View v) {
+				EditManager.getInstance().showPopup(mContext, null);				
+				return true;
+			}
+		});
+		
+		rowView.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				FileObject fo = (FileObject) getItem(position);
+				if (fo.isFile()) {
+					FileUtil.openFile(mContext, fo);
+				}else {
+					FileUtil.openDirectory(mContext, fo);
+				}
+			}
+		});
     	
 //        ImageView imageView;
 //        if (convertView == null) {  // if it's not recycled, initialize some attributes

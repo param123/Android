@@ -42,7 +42,7 @@ public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 	}
 	
 	@Override
-	 public View getView(int position, View convertView, ViewGroup parent) {
+	 public View getView(final int position, View convertView, ViewGroup parent) {
 	
 		
 		// ViewHolder will buffer the assess to the individual fields of the row
@@ -72,9 +72,20 @@ public class FileAdapter extends ArrayAdapter<FileObject> implements IDataStore{
 		rowView.setOnLongClickListener(new OnLongClickListener() {
 			
 			public boolean onLongClick(View v) {
-				EditManager.getInstance().showPopup(context, null);
-				
+				EditManager.getInstance().showPopup(context, null);				
 				return true;
+			}
+		});
+		
+		rowView.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				FileObject fo = (FileObject) getItem(position);
+				if (fo.isFile()) {
+					FileUtil.openFile(context, fo);
+				}else {
+					FileUtil.openDirectory(context, fo);
+				}
 			}
 		});
 		
